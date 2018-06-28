@@ -445,10 +445,17 @@ gulp.task('buildnumber', function (done) {
 
   exec('git log --format=oneline ' + config.baseVersion + '..',
       function (err, stdout, stderr) {
-    var buildNumber = 0;
     if (!err) {
       // Build number is the number of commits since base version
+      var buildNumber = 0;
       buildNumber = stdout ? stdout.match(/\n/g).length : 0;
+    }
+    else{
+      console.log("###############################################################");
+      console.log("This repository was not cloned or downloaded from GitHub.");
+      console.log("git clone  git://github.com/mozilla/pdf.js.git");
+      console.log("OR\nDownload Repository from https://github.com/mozilla/pdf.js");
+      console.log("###############################################################s");
     }
 
     console.log('Extension build number: ' + buildNumber);
